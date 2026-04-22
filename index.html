@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>breach.rip</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:,">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600&family=JetBrains+Mono&display=swap"
+        rel="stylesheet">
     <style>
         :root {
             --bg-color: #000000;
@@ -23,7 +26,7 @@
             background-color: var(--bg-color);
             color: var(--text-primary);
             font-family: 'Outfit', sans-serif;
-            height: 250vh; /* Allow enough room to scroll */
+            height: 250vh;
             overflow-x: hidden;
         }
 
@@ -36,7 +39,7 @@
             z-index: 1;
         }
 
-        /* Scroll Indicator */
+
         .scroll-indicator {
             position: fixed;
             bottom: 40px;
@@ -73,13 +76,25 @@
         }
 
         @keyframes scrollLine {
-            0% { top: -100%; }
-            100% { top: 100%; }
+            0% {
+                top: -100%;
+            }
+
+            100% {
+                top: 100%;
+            }
         }
 
         @keyframes float {
-            0%, 100% { transform: translate(-50%, 0); }
-            50% { transform: translate(-50%, -10px); }
+
+            0%,
+            100% {
+                transform: translate(-50%, 0);
+            }
+
+            50% {
+                transform: translate(-50%, -10px);
+            }
         }
 
         /* Centered Reveal Text */
@@ -91,7 +106,8 @@
             z-index: 5;
             text-align: center;
             width: 100%;
-            opacity: 0; /* Hidden by default */
+            opacity: 0;
+            /* Hidden by default */
             pointer-events: none;
         }
 
@@ -114,9 +130,10 @@
         }
     </style>
 </head>
+
 <body>
     <canvas id="star-canvas"></canvas>
-    
+
     <div class="scroll-indicator" id="indicator">
         SCROLL
         <div class="scroll-line"></div>
@@ -174,24 +191,25 @@
         window.addEventListener('scroll', () => {
             const scrollPos = window.scrollY;
             const windowHeight = window.innerHeight;
-            
+
             // Star Parallax
             canvas.style.transform = `translateY(${scrollPos * 0.15}px)`;
-            
+
             // Calculate opacity based on scroll
             let opacity = (scrollPos - 50) / (windowHeight * 0.6);
             if (opacity < 0) opacity = 0;
             if (opacity > 1) opacity = 1;
-            
+
             content.style.opacity = opacity;
-            
+
             // Subtle upward float as it reveals
             const floatOffset = 10 - (opacity * 10);
             content.style.transform = `translate(-50%, calc(-50% + ${floatOffset}px))`;
-            
+
             // Fade out scroll indicator
             indicator.style.opacity = 1 - (scrollPos / 300);
         });
     </script>
 </body>
+
 </html>
